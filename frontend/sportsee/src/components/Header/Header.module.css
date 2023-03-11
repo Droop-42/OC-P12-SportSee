@@ -1,0 +1,22 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+    color: #FF6060;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    background-color: black;
+    align-items: center;
+    justify-content: space-between; 
+    /*width: 100%;*/
+    padding: 20px 30px;
+    box-shadow: #FF6060;  
+}
+
+a:link {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+  }
