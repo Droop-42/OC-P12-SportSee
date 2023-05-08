@@ -7,15 +7,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Profil from './views/Profil'
 import LeftPanel from './components/LeftPanel'
-
+import Error404 from './views/Error404'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
   return (
     <>
       <Header />
-      <LeftPanel />
-      <Outlet />
+      <div id='row'>
+        <LeftPanel />
+        <Outlet />
+      </div>
     </>
   )
 }
@@ -25,7 +27,8 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route path="profil" element={<Profil />}  />
+          <Route path="profil/:userId" element={<Profil />}  />
+          <Route path='*' element={<Error404 />} />
         </Route>
       </Routes>
     </Router> 

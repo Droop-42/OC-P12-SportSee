@@ -1,0 +1,40 @@
+.profil {
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    margin: 0px 80px;
+    align-items: center;
+}
+.greetings {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+.dashContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: 835px;
+}
+
+strong {
+    color: red;
+}
+
+.charts {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+.rightPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+}

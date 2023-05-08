@@ -1,0 +1,20 @@
+.lineGraph {
+    display: flex;
+    width: 258px;
+    height: 263px;
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    position: relative;
+    right: 230px;
+    bottom: 70px;
+    font-weight: 400;
+    font-size: 18px;
+    margin-right: -70px;
+    color: white;
+}

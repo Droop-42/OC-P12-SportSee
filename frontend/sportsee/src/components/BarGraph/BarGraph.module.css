@@ -1,0 +1,8 @@
+.barGraph {
+    display: flex;
+    width: 835px;
+    height: 320px;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    margin: 10px 0 ;
+}
