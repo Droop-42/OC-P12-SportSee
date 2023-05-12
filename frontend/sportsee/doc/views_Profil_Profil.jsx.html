@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: views/Profil/Profil.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: views/Profil/Profil.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable react/react-in-jsx-scope */
+import LineGraph from '../../components/LineGraph/LineGraph';
+import PieGraph from '../../components/PieGraph/PieGraph';
+import RadarGraph from '../../components/RadarGraph';
+import BarGraph from '../../components/BarGraph';
+import MiniChart from '../../components/MiniChart';
+import styles from './Profil.module.css'
+import icon1 from '../../assets/calories-icon.png';
+import icon2 from '../../assets/protein-icon.png';
+import icon3 from '../../assets/carbs-icon.png';
+import icon4 from '../../assets/fat-icon.png';
+import { useParams } from 'react-router-dom'
+//import { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } from '../../API/RESTRequests'
+import { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } from '../../API/MockedRESTRequests'
+import { useState, useEffect } from "react";
+import { UserMainDataModel } from '../../formatModels/UserMainDataModel'
+import { UserActivityModel } from '../../formatModels/UserActivityModel'
+import { UserSessionModel } from '../../formatModels/UserSessionModel'
+import { UserPerfModel } from '../../formatModels/UserPerfModel'
+import Error404 from '../../views/Error404'
+
+
+/**
+ * Return the profil view of the user
+ * @returns {object} - The view
+ */
+export default function Profil() {
+    const { userId } = useParams()
+    let [name, setName] = useState('toto')
+    let [score, setScore] = useState(0)
+    let [keyData, setKeyData] = useState()
+    let [activity, setActivity] = useState([])
+    let [sessions, setSessions] = useState([])
+    let [perfs, setPerfs] = useState({})
+
+// !! init var obj/list -> pb en cas d'async 
+// modif:
+// au lieu de keyData -> calorieCount, proteinCount, ... 
+
+    useEffect( () => {
+        async function fetchData() {
+            let userData = await getUserMainData(userId)
+            userData = new UserMainDataModel(userData)
+            setName(userData.firstName)
+            setScore(userData.score)
+            setKeyData(userData.keyData)
+
+            let userActivity = await getUserActivity(userId)
+            userActivity = new UserActivityModel(userActivity)
+            setActivity(userActivity.sessions)
+
+            let userSessions = await getUserAverageSession(userId)
+            userSessions = new UserSessionModel(userSessions)
+            setSessions(userSessions.sessions)
+
+            let userPerfs = await getUserPerformance(userId)
+            userPerfs = new UserPerfModel(userPerfs)
+            setPerfs(userPerfs.datas)
+
+        } fetchData()
+    }, [userId])
+
+    if (!keyData) {return &lt;Error404 />}
+    
+    return (
+        &lt;div className={styles.profil}>
+            &lt;div className={styles.greetings}>
+                &lt;h1>Bonjours &lt;strong>{name}&lt;/strong>&lt;/h1>
+                &lt;p>Félicitation! Vous avez explosé vos objectifs hier 👋 &lt;/p>
+            &lt;/div>
+            &lt;div className={styles.dashContainer} >
+            &lt;div className={styles.dashboard}>
+                &lt;BarGraph activity={activity}/>
+                &lt;div className={styles.charts}>
+                        &lt;LineGraph session={sessions}/>
+                        &lt;RadarGraph perf={perfs}/>
+                        &lt;PieGraph score={score}/>
+                &lt;/div>
+            &lt;/div>
+            &lt;div className={styles.rightPanel}>
+                &lt;MiniChart title={'Calories'} icon={icon1} data={keyData.calorieCount} unit="kCal"/>
+                &lt;MiniChart title={'Proteines'} icon={icon2} data={keyData.proteinCount} unit="g"/>
+                &lt;MiniChart title={'Glucides'} icon={icon3} data={keyData.carbohydrateCount} unit="g"/>
+                &lt;MiniChart title={'Lipides'} icon={icon4} data={keyData.lipidCount} unit="g"/>
+            &lt;/div>
+            &lt;/div>
+            
+        &lt;/div>      
+    )
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="UserActivityModel.html">UserActivityModel</a></li><li><a href="UserMainDataModel.html">UserMainDataModel</a></li><li><a href="UserPerfModel.html">UserPerfModel</a></li><li><a href="UserSessionModel.html">UserSessionModel</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserMainData">getUserMainData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu May 11 2023 18:34:48 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
