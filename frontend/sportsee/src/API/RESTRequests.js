@@ -1,6 +1,6 @@
 
 /**
- * Get the user main data from API
+ * Get the user main data from API 
  * @param {number} userId - The user id.
  * @returns {Promise} - The main data
  */
