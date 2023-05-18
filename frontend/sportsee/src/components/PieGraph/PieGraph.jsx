@@ -31,7 +31,6 @@ export default function PieGraph ({score}) {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>      
-          <Tooltip />
         </PieChart>
         <span className={styles.title}>Score</span>
         <span className={styles.score}>{score*100}%</span>

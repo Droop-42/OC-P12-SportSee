@@ -6,6 +6,7 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
+  PolarRadiusAxis
   //ResponsiveContainer
 } from "recharts";
 
@@ -15,6 +16,10 @@ import {
  * @returns {HTMLElement} - The radar chart element
  */
 export default function RadarGraph ({perf}) {
+  const axis = ["Intensité","Vitesse","Force","Endurance","Energie","Cardio"]
+  function formatAxis (value) {
+    return axis[value]
+  }
   return (
     <div className={styles.radarChart}>
       <RadarChart
@@ -25,8 +30,8 @@ export default function RadarGraph ({perf}) {
         height={230}
         data={perf.data}
       >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="kind"/>
+        <PolarGrid radialLines={false} />
+        <PolarAngleAxis tickLine={false} axisLine={false}  tickFormatter={formatAxis} style={{ fontSize: 11, stroke: 'white', strokeWidth: 0.5 }}/>
         <Radar
           name="Performances"
           dataKey="value"

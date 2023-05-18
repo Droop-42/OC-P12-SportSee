@@ -6,3 +6,12 @@
     background-color: #FBFBFB;
     margin: 10px 0 ;
 }
+.txtLegend {
+    color: black;
+}
+.custom_tooltip {
+    background-color: red;
+    padding: 2px;
+    font-weight: 10px !important;
+    color: white;
+}

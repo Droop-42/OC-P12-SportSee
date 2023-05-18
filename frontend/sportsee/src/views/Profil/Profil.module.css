@@ -4,11 +4,12 @@
     flex-direction: column;
     margin: 0px 80px;
     align-items: center;
+    z-index: 1;
 }
 .greetings {
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 1050px;
 }
 .dashContainer {
     display: flex;
