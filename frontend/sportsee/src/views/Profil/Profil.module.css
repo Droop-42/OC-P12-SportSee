@@ -39,3 +39,33 @@ strong {
     justify-content: space-between;
     padding: 30px 0;
 }
+
+@media screen and (max-width: 1200px) {
+    .dashContainer {
+        display: flex;
+        flex-direction: column;
+        width: 900px;
+        gap: 10px;
+        align-items: center;
+    }
+    .profil {
+        display: flex;
+        width:75%;
+        flex-direction: column;
+        margin: 0px 60px;
+        align-items: center;
+        z-index: 1;
+    }
+    .rightPanel {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 30px 0;
+        gap: 5px;
+    }
+    .greetings {
+        display: flex;
+        flex-direction: column;
+        width: 750px;
+    }
+}

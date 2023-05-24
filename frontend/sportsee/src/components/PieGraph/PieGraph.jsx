@@ -26,6 +26,7 @@ export default function PieGraph ({score}) {
             outerRadius={80}
             cornerRadius={10}
             fill='red'
+            startAngle={90}
             >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
