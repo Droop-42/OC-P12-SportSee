@@ -2,7 +2,7 @@
 
 This repo contains the code to run the sports analytics dashboard SportSee.
 
-## 1. General information
+### 1. General information
 
 The project works by default with mocked data.
 To test the backend: see the README.md of the backend repository,
