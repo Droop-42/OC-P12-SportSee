@@ -4,9 +4,9 @@ This repo contains the code to run the sports analytics dashboard SportSee.
 
 ## 1. General information
 
-The project work by default with mocked data.
+The project works by default with mocked data.
 To test the backend: see the README.md of the backend repository,
-and change, the environment variable (.env file) `REACT_APP_MOCK_ACTIVE` from `true` to `false`
+and change the environment variable (.env file) `REACT_APP_MOCK_ACTIVE` from `true` to `false`
 
 ### 2.1 Prerequisites
 
