@@ -3,66 +3,35 @@ import * as React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Rectangle } from "recharts";
 import PropTypes from 'prop-types'
 
-/*const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.custom_tooltip}>
-        <p className="label">{`${payload[0].value}`+" mn"}</p>
-      </div>
-    );
-  }
-
-  return null;
-}*/
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
       <div
-        className="custom-tooltip"
         style={{
-          backgroundColor: '#FFFFFF',
-          color: '#000000',
+          backgroundColor: 'white',
           fontSize: '8px',
-          fontWeight: '500',
           textAlign: 'center',
-          lineHeight: '24px',
-          fontStyle: 'normal',
-          width: '39px',
+          lineHeight: '25px',
+          width: '40px',
           height: '25px',
-          borderColor: 'transparent',
         }}
       >
-        <p className="label">{`${payload[0].value} min`}</p>
+        <p>{`${payload[0].value} min`}</p>
       </div>
     )
   }
 
   return null
 }
-/*const CustomCursor = (props) => {
-  const { points, width, height, stroke } = props;
-  const { x, y } = points[0];
-  const { x1, y1 } = points[1];
+const CustomCursor = (props) => {
+  const { points } = props;
   console.log(props);
   return (
     <Rectangle
       fill="#D00000"
-      stroke="#D00000"
-      x={x-1}
-      y={y}
-      width={width}
-      height={height}
-    />
-  );
-};*/
-const CustomCursor = ({ points }) => {
-  return (
-    <Rectangle
-      fill="#000000"
-      opacity={0.2}
       x={points[1].x}
-      width={1200}
-      height={850}
+      width={260}
+      height={260}
     />
   );
 };
@@ -86,7 +55,7 @@ export default function LineGraph({session}) {
       >
         <Tooltip 
           content={<CustomTooltip />} 
-          wrapperStyle={{ zIndex: 1000 }} 
+          /*wrapperStyle={{ zIndex: 1000 }} */
           cursor={<CustomCursor />}
         />
         <Line 
