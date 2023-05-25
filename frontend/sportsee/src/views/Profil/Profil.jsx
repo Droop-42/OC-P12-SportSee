@@ -11,7 +11,8 @@ import icon3 from '../../assets/carbs-icon.png';
 import icon4 from '../../assets/fat-icon.png';
 import { useParams } from 'react-router-dom'
 //import { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } from '../../API/RESTRequests'
-import { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } from '../../API/MockedRESTRequests'
+//import { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } from '../../API/MockedRESTRequests'
+import {API} from '../../API'
 import { useState, useEffect } from "react";
 import { UserMainDataModel } from '../../formatModels/UserMainDataModel'
 import { UserActivityModel } from '../../formatModels/UserActivityModel'
@@ -19,6 +20,7 @@ import { UserSessionModel } from '../../formatModels/UserSessionModel'
 import { UserPerfModel } from '../../formatModels/UserPerfModel'
 import Error404 from '../../views/Error404'
 
+const { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } = API
 
 /**
  * Return the profil view of the user

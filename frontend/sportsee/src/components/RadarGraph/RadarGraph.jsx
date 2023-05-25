@@ -29,9 +29,11 @@ export default function RadarGraph ({perf}) {
         width={250}
         height={230}
         data={perf.data}
+        fill='red'
+        fillOpacity={0.6}
       >
         <PolarGrid radialLines={false} />
-        <PolarAngleAxis tickLine={false} axisLine={false}  tickFormatter={formatAxis} style={{ fontSize: 11, stroke: 'white', strokeWidth: 0.5 }}/>
+        <PolarAngleAxis tickLine={false} axisLine={false}  tickFormatter={formatAxis} style={{ fill: 'white', fontSize: 12, stroke: 'white', strokeWidth: 0.5 }}/>
         <Radar
           name="Performances"
           dataKey="value"
