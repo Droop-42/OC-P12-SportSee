@@ -3,7 +3,7 @@ import * as React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Rectangle } from "recharts";
 import PropTypes from 'prop-types'
 
-const CustomTooltip = ({ active, payload, label }) => {
+/*const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className={styles.custom_tooltip}>
@@ -13,8 +13,33 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 
   return null;
+}*/
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        className="custom-tooltip"
+        style={{
+          backgroundColor: '#FFFFFF',
+          color: '#000000',
+          fontSize: '8px',
+          fontWeight: '500',
+          textAlign: 'center',
+          lineHeight: '24px',
+          fontStyle: 'normal',
+          width: '39px',
+          height: '25px',
+          borderColor: 'transparent',
+        }}
+      >
+        <p className="label">{`${payload[0].value} min`}</p>
+      </div>
+    )
+  }
+
+  return null
 }
-const CustomCursor = (props) => {
+/*const CustomCursor = (props) => {
   const { points, width, height, stroke } = props;
   const { x, y } = points[0];
   const { x1, y1 } = points[1];
@@ -27,6 +52,17 @@ const CustomCursor = (props) => {
       y={y}
       width={width}
       height={height}
+    />
+  );
+};*/
+const CustomCursor = ({ points }) => {
+  return (
+    <Rectangle
+      fill="#000000"
+      opacity={0.2}
+      x={points[1].x}
+      width={1200}
+      height={850}
     />
   );
 };
@@ -44,8 +80,8 @@ export default function LineGraph({session}) {
   return (
     <div className={styles.lineGraph}>
       <LineChart 
-        width={270} 
-        height={220} 
+        width={260} 
+        height={260} 
         data={session}
       >
         <Tooltip 
@@ -56,7 +92,7 @@ export default function LineGraph({session}) {
         <Line 
           type="natural" 
           dataKey="sessionLength" 
-          dot={false} activeDot={{ r: 8 }} 
+          dot={false} activeDot={{ r: 3 }} 
           stroke="#FFFFFF" 
           strokeWidth={2} 
         />
@@ -69,10 +105,13 @@ export default function LineGraph({session}) {
           tickFormatter={formatXAxis} 
           tickLine={false} 
           axisLine={false} 
-          tick={{stroke: 'white', strokeWidth: 2}}
+          tick={{fill: 'white', fontSize: '12px' }}
         />
-        <text x={15} y={8} fill="white" textAnchor="left" dominantBaseline="central">
-            <tspan fontSize="18">Durée moyenne des sessions</tspan>
+        <text x={15} y={15} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+            <tspan fontSize="15">Durée moyenne des</tspan>
+        </text>
+        <text x={15} y={30} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+            <tspan fontSize="15">sessions</tspan>
         </text>
       </LineChart>
     </div>
