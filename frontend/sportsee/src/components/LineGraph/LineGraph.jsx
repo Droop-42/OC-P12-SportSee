@@ -3,30 +3,35 @@ import * as React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Rectangle } from "recharts";
 import PropTypes from 'prop-types'
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className={styles.custom_tooltip}>
-        <p className="label">{`${payload[0].value}`+" mn"}</p>
+      <div
+        style={{
+          backgroundColor: 'white',
+          fontSize: '8px',
+          textAlign: 'center',
+          lineHeight: '25px',
+          width: '40px',
+          height: '25px',
+        }}
+      >
+        <p>{`${payload[0].value} min`}</p>
       </div>
-    );
+    )
   }
 
-  return null;
+  return null
 }
 const CustomCursor = (props) => {
-  const { points, width, height, stroke } = props;
-  const { x, y } = points[0];
-  const { x1, y1 } = points[1];
+  const { points } = props;
   console.log(props);
   return (
     <Rectangle
       fill="#D00000"
-      stroke="#D00000"
-      x={x-1}
-      y={y}
-      width={width}
-      height={height}
+      x={points[1].x}
+      width={260}
+      height={260}
     />
   );
 };
@@ -44,19 +49,19 @@ export default function LineGraph({session}) {
   return (
     <div className={styles.lineGraph}>
       <LineChart 
-        width={270} 
-        height={220} 
+        width={260} 
+        height={260} 
         data={session}
       >
         <Tooltip 
           content={<CustomTooltip />} 
-          wrapperStyle={{ zIndex: 1000 }} 
+          /*wrapperStyle={{ zIndex: 1000 }} */
           cursor={<CustomCursor />}
         />
         <Line 
           type="natural" 
           dataKey="sessionLength" 
-          dot={false} activeDot={{ r: 8 }} 
+          dot={false} activeDot={{ r: 3 }} 
           stroke="#FFFFFF" 
           strokeWidth={2} 
         />
@@ -69,10 +74,13 @@ export default function LineGraph({session}) {
           tickFormatter={formatXAxis} 
           tickLine={false} 
           axisLine={false} 
-          tick={{stroke: 'white', strokeWidth: 2}}
+          tick={{fill: 'white', fontSize: '12px' }}
         />
-        <text x={15} y={8} fill="white" textAnchor="left" dominantBaseline="central">
-            <tspan fontSize="18">Durée moyenne des sessions</tspan>
+        <text x={15} y={15} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+            <tspan fontSize="15">Durée moyenne des</tspan>
+        </text>
+        <text x={15} y={30} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+            <tspan fontSize="15">sessions</tspan>
         </text>
       </LineChart>
     </div>
