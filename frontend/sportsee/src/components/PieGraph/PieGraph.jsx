@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./PieGraph.module.css";
-import { PieChart, Pie, Tooltip, Cell } from "recharts";
+import { PieChart, Pie, Legend, Cell } from "recharts";
 import PropTypes from 'prop-types'
+
 
 /**
  * Return the pie chart of the user score
@@ -27,15 +28,25 @@ export default function PieGraph ({score}) {
             cornerRadius={10}
             fill='red'
             startAngle={90}
+            endAngle={450}
             >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
-          </Pie>      
+          </Pie> 
+          <text x={25} y={30} fill="black" dominantBaseline="central">
+            <tspan fontSize="15">Score</tspan>
+          </text> 
+          <text x={110} y={110} fill="black" dominantBaseline="central">
+            <tspan fontSize="26">{score*100}%</tspan>
+          </text>
+          <text x={105} y={140} fill="#747986" dominantBaseline="central">
+            <tspan fontSize="16">de votre</tspan>
+          </text>
+          <text x={105} y={160} fill="#747986" dominantBaseline="central">
+            <tspan fontSize="16">objectif</tspan>
+          </text>    
         </PieChart>
-        <span className={styles.title}>Score</span>
-        <span className={styles.score}>{score*100}%</span>
-        <span className={styles.subScore}>de votre objectif</span>
     </div>
     
   )

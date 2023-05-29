@@ -65,7 +65,7 @@ export default function LineGraph({session}) {
           stroke="#FFFFFF" 
           strokeWidth={2} 
         />
-        <YAxis padding={{ top: 20, bottom: 20 }} tickLine={false} axisLine={false} tick={false}/>
+        <YAxis padding={{ top: 20, bottom: 20 }} tickLine={false} axisLine={false} tick={false} domain={['dataMin -10', 'dataMax + 20']}/>
         <XAxis 
           fill="white" 
           tickMargin={15} 
@@ -74,12 +74,13 @@ export default function LineGraph({session}) {
           tickFormatter={formatXAxis} 
           tickLine={false} 
           axisLine={false} 
-          tick={{fill: 'white', fontSize: '12px' }}
+          tick={{fill: 'white', fontSize: '12px' , opacity: '0.8', padding_bottom: '30px'}}
+          dy={-10}
         />
-        <text x={15} y={15} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+        <text x={25} y={30} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
             <tspan fontSize="15">Durée moyenne des</tspan>
         </text>
-        <text x={15} y={30} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
+        <text x={25} y={50} fill="white" opacity={0.8} textAnchor="left" dominantBaseline="central">
             <tspan fontSize="15">sessions</tspan>
         </text>
       </LineChart>

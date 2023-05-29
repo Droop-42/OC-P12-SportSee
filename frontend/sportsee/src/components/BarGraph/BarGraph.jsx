@@ -51,10 +51,10 @@ export default function BarGraph({activity}) {
           }}
         >
           <CartesianGrid strokeDasharray="1 1" vertical={false}/>
-          <XAxis dataKey="day" tickFormatter={monthTickFormatter} tickLine={false}/>
+          <XAxis dataKey="day" tickFormatter={monthTickFormatter} tickLine={false} axisLine={true} dy={5}/>
           <YAxis yAxisId="left" orientation="right" dataKey="kilogram" tickLine={false} axisLine={false} tickCount={3} domain={['dataMin -2', 'dataMax + 1']}/>
           <YAxis yAxisId="right" orientation="left" dataKey="calories" tickLine={false} tick={false} tickCount={3} axisLine={false} interval="preserveEnd"/>
-          <Tooltip cursor={false} content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }}/>
+          <Tooltip cursor={{ fill: '#f2f2f2'}} content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }}/>
           <Legend verticalAlign="top" align="right" iconType="circle" iconSize={10} height={80} formatter={(value, entry, index) => 
                { if (value == "kilogram") { return <span className={styles.txtLegend}>Poids (kg)</span>}
               else { return <span className={styles.txtLegend}>Calories brûlées (kCal)</span>} }

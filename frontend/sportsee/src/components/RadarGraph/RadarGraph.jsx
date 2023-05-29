@@ -23,17 +23,17 @@ export default function RadarGraph ({perf}) {
   return (
     <div className={styles.radarChart}>
       <RadarChart
-        cx={125}
-        cy={115}
+        cx={126}
+        cy={120}
         outerRadius={90}
         width={250}
         height={230}
         data={perf.data}
         fill='red'
-        fillOpacity={0.6}
+        /*fillOpacity={0.6}*/
       >
         <PolarGrid radialLines={false} />
-        <PolarAngleAxis tickLine={false} axisLine={false}  tickFormatter={formatAxis} style={{ fill: 'white', fontSize: 12, stroke: 'white', strokeWidth: 0.5 }}/>
+        <PolarAngleAxis tickLine={false} axisLine={false}  tickFormatter={formatAxis} style={{ fill: 'white', fontSize: '12px', margin: '5px'}} dy={3}/>
         <Radar
           name="Performances"
           dataKey="value"
