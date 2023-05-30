@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: black;
     width: 117px;
-    min-height: 1024px;
+    height: 100vh;
     padding: 10px;
     align-items: center;
     z-index: 100;
