@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Profil from './views/Profil'
 import LeftPanel from './components/LeftPanel'
 import Error404 from './views/Error404'
+import Error500 from './views/Error500'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
@@ -29,6 +30,7 @@ root.render(
         <Route path="/" element={<Layout />} >
           <Route path="profil/:userId" element={<Profil />}  />
           <Route path='*' element={<Error404 />} />
+          <Route path='error500' element={<Error500 />} />
         </Route>
       </Routes>
     </Router> 

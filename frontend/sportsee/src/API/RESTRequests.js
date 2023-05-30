@@ -5,8 +5,12 @@
  * @returns {Promise} - The main data
  */
 export async function getUserMainData (userId) {
-  const response = await fetch('http://localhost:3000/user/'+userId)
-  return response.json()
+  try {
+    const response = await fetch('http://localhost:3000/user/'+userId)
+    return response.json()
+  } catch (error) {
+    console.error(error)
+  }
 }
 /**
  * Get the user activity data from API
@@ -14,8 +18,12 @@ export async function getUserMainData (userId) {
  * @returns {Promise} - The activity data
  */
 export async function getUserActivity (userId) {
-  const response = await fetch('http://localhost:3000/user/'+userId+'/activity')
-  return response.json()
+  try {
+    const response = await fetch('http://localhost:3000/user/'+userId+'/activity')
+    return response.json()
+  } catch (error) {
+    console.error(error)
+  }
 }
 /**
  * Get the user session data from API
@@ -23,8 +31,12 @@ export async function getUserActivity (userId) {
  * @returns {Promise} - The session data
  */
 export async function getUserAverageSession (userId) {
-  const response = await fetch('http://localhost:3000/user/'+userId+'/average-sessions')
-  return response.json()
+  try {
+    const response = await fetch('http://localhost:3000/user/'+userId+'/average-sessions')
+    return response.json()
+  } catch (error) {
+    console.error(error)
+  }
 }
 /**
  * Get the user performance data from API
@@ -32,7 +44,11 @@ export async function getUserAverageSession (userId) {
  * @returns {Promise} - The performance data
  */
 export async function getUserPerformance (userId) {
-  const response = await fetch('http://localhost:3000/user/'+userId+'/performance')
-  return response.json()
+  try {
+    const response = await fetch('http://localhost:3000/user/'+userId+'/performance')
+    return response.json()
+  } catch (error) {
+    console.error(error)
+  }
 }
 

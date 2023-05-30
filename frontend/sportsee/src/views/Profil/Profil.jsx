@@ -18,7 +18,7 @@ import { UserMainDataModel } from '../../formatModels/UserMainDataModel'
 import { UserActivityModel } from '../../formatModels/UserActivityModel'
 import { UserSessionModel } from '../../formatModels/UserSessionModel'
 import { UserPerfModel } from '../../formatModels/UserPerfModel'
-import Error404 from '../../views/Error404'
+import Error500 from '../../views/Error500'
 
 const { getUserMainData, getUserActivity, getUserAverageSession, getUserPerformance } = API
 
@@ -62,7 +62,9 @@ export default function Profil() {
         } fetchData()
     }, [userId])
 
-    if (!keyData) {return <Error404 />}
+    if (!keyData) {
+         return <Error500 />
+    }
     
     return (
         <div className={styles.profil}>
@@ -89,4 +91,12 @@ export default function Profil() {
             
         </div>      
     )
+}
+
+var wait = (ms) => {
+    const start = Date.now();
+    let now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
 }
