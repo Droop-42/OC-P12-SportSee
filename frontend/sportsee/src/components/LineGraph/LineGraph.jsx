@@ -57,6 +57,7 @@ export default function LineGraph({session}) {
           content={<CustomTooltip />} 
           /*wrapperStyle={{ zIndex: 1000 }} */
           cursor={<CustomCursor />}
+          wrapperStyle={{ outline: "none" }}
         />
         <Line 
           type="natural" 
