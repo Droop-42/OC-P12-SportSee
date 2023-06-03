@@ -30,73 +30,81 @@ export default function Profil() {
     const { userId } = useParams()
     let [name, setName] = useState('toto')
     let [score, setScore] = useState(0)
-    let [keyData, setKeyData] = useState()
+    let [keyData, setKeyData] = useState([])
     let [activity, setActivity] = useState([])
     let [sessions, setSessions] = useState([])
     let [perfs, setPerfs] = useState({})
+    let [isError, setIsError] = useState(false)
 
-// !! init var obj/list -> pb en cas d'async 
-// modif:
-// au lieu de keyData -> calorieCount, proteinCount, ... 
 
     useEffect( () => {
         async function fetchData() {
-            let userData = await getUserMainData(userId)
-            userData = new UserMainDataModel(userData)
-            setName(userData.firstName)
-            setScore(userData.score)
-            setKeyData(userData.keyData)
+            getUserMainData(userId)
+                .then((data) => {
+                    const userData = new UserMainDataModel(data)
+                    setName(userData.firstName)
+                    setScore(userData.score)
+                    setKeyData(userData.keyData)
+                    setIsError(false)
+                })
+                .catch((err) => setIsError(true))
+            
 
-            let userActivity = await getUserActivity(userId)
-            userActivity = new UserActivityModel(userActivity)
-            setActivity(userActivity.sessions)
+            getUserActivity(userId)
+                .then((data) => {
+                    const userActivity = new UserActivityModel(data)
+                    setActivity(userActivity.sessions)
+                    setIsError(false)
+                })
+                .catch((err) => setIsError(true))
 
-            let userSessions = await getUserAverageSession(userId)
-            userSessions = new UserSessionModel(userSessions)
-            setSessions(userSessions.sessions)
+            getUserAverageSession(userId)
+                .then((data) => {
+                    const userSessions = new UserSessionModel(data)
+                    setSessions(userSessions.sessions)
+                    setIsError(false)
+                })
+                .catch((err) => setIsError(true))
 
-            let userPerfs = await getUserPerformance(userId)
-            userPerfs = new UserPerfModel(userPerfs)
-            setPerfs(userPerfs.datas)
+            getUserPerformance(userId)
+                .then((data) => {
+                    const userPerfs = new UserPerfModel(data)
+                    setPerfs(userPerfs.datas)
+                    setIsError(false)
+                })
+                .catch((err) => setIsError(true))
 
         } fetchData()
     }, [userId])
 
-    if (!keyData) {
+    if (isError) {
          return <Error500 />
+    } else {
+        return (
+            <div className={styles.profil}>
+                <div className={styles.greetings}>
+                    <h1>Bonjours <strong>{name}</strong></h1>
+                    <p>Félicitation! Vous avez explosé vos objectifs hier 👋 </p>
+                </div>
+                <div className={styles.dashContainer} >
+                <div className={styles.dashboard}>
+                    <BarGraph activity={activity}/>
+                    <div className={styles.charts}>
+                            <LineGraph session={sessions}/>
+                            <RadarGraph perf={perfs}/>
+                            <PieGraph score={score}/>
+                    </div>
+                </div>
+                <div className={styles.rightPanel}>
+                    <MiniChart title={'Calories'} icon={icon1} data={keyData.calorieCount} unit="kCal"/>
+                    <MiniChart title={'Proteines'} icon={icon2} data={keyData.proteinCount} unit="g"/>
+                    <MiniChart title={'Glucides'} icon={icon3} data={keyData.carbohydrateCount} unit="g"/>
+                    <MiniChart title={'Lipides'} icon={icon4} data={keyData.lipidCount} unit="g"/>
+                </div>
+                </div>             
+            </div>      
+        )
     }
     
-    return (
-        <div className={styles.profil}>
-            <div className={styles.greetings}>
-                <h1>Bonjours <strong>{name}</strong></h1>
-                <p>Félicitation! Vous avez explosé vos objectifs hier 👋 </p>
-            </div>
-            <div className={styles.dashContainer} >
-            <div className={styles.dashboard}>
-                <BarGraph activity={activity}/>
-                <div className={styles.charts}>
-                        <LineGraph session={sessions}/>
-                        <RadarGraph perf={perfs}/>
-                        <PieGraph score={score}/>
-                </div>
-            </div>
-            <div className={styles.rightPanel}>
-                <MiniChart title={'Calories'} icon={icon1} data={keyData.calorieCount} unit="kCal"/>
-                <MiniChart title={'Proteines'} icon={icon2} data={keyData.proteinCount} unit="g"/>
-                <MiniChart title={'Glucides'} icon={icon3} data={keyData.carbohydrateCount} unit="g"/>
-                <MiniChart title={'Lipides'} icon={icon4} data={keyData.lipidCount} unit="g"/>
-            </div>
-            </div>
-            
-        </div>      
-    )
-}
-
-var wait = (ms) => {
-    const start = Date.now();
-    let now = start;
-    while (now - start < ms) {
-      now = Date.now();
-    }
+    
 }
